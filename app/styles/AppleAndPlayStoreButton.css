@@ -1,0 +1,74 @@
+.store-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 20px 40px 20px;
+  background: #ffffff;
+}
+
+/* Button wrapper */
+.app-store-button {
+  position: relative;
+  display: block;
+
+  padding: 1px; /* kapal ng border */
+  border-radius: 10px;
+  overflow: hidden;
+
+  transition: transform 0.2s;
+}
+
+/* Hover scale */
+.app-store-button:hover {
+  transform: scale(1.05);
+}
+
+/* Moving rainbow border */
+.app-store-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    #020617,
+    #7c3aed,
+    #22d3ee,
+    #06b6d4,
+    #3b82f6,
+    #ec4899,
+    #f472b6,
+    #020617
+  );
+
+  background-size: 300% 300%;
+  animation: rainbow-border 7s linear infinite;
+
+  z-index: 0;
+}
+
+/* Image (inner content) */
+.store-button-image {
+  position: relative;
+  z-index: 1;
+
+  height: 48px;
+  width: auto;
+
+  cursor: pointer;
+
+  background: #ffffff;
+  border-radius: 7px;
+  padding: 1px;
+}
+
+/* Animation */
+@keyframes rainbow-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
