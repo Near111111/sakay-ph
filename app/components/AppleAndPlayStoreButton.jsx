@@ -29,7 +29,7 @@ export default function AppleAndPlayStoreButton() {
         className="app-store-button"
       >
         <Image
-          src="/sakay_appstore.png"
+          src="/appstore.png"
           alt="Download on the App Store"
           width={160}
           height={48}

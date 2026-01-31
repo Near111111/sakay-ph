@@ -5,17 +5,18 @@
   gap: 16px;
   padding: 24px 20px 40px 20px;
   background: #ffffff;
+  flex-wrap: wrap;
 }
 
 /* Button wrapper */
 .app-store-button {
   position: relative;
-  display: block;
-
-  padding: 1px; /* kapal ng border */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
   border-radius: 10px;
   overflow: hidden;
-
   transition: transform 0.2s;
 }
 
@@ -29,7 +30,6 @@
   content: "";
   position: absolute;
   inset: 0;
-
   background: linear-gradient(
     90deg,
     #020617,
@@ -41,23 +41,21 @@
     #f472b6,
     #020617
   );
-
   background-size: 300% 300%;
   animation: rainbow-border 7s linear infinite;
-
   z-index: 0;
 }
 
-/* Image (inner content) */
+/* Image (inner content) - FIXED SIZING */
 .store-button-image {
   position: relative;
   z-index: 1;
-
-  height: 48px;
-  width: auto;
-
+  height: 48px !important;
+  width: auto !important;
+  min-width: 140px;
+  max-height: 48px !important;
+  object-fit: contain;
   cursor: pointer;
-
   background: #ffffff;
   border-radius: 7px;
   padding: 1px;
@@ -70,5 +68,64 @@
   }
   100% {
     background-position: 300% 50%;
+  }
+}
+
+/* ===== FOOTER OVERRIDES ===== */
+/* When inside footer, remove white background and adjust layout */
+.footer-download .store-buttons-container {
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.footer-download .app-store-button {
+  padding: 2px;
+}
+
+.footer-download .store-button-image {
+  height: 48px !important;
+  min-width: 150px;
+  background: #ffffff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .store-buttons-container {
+    flex-direction: row; /* Changed to row para magkatabi */
+    gap: 10px;
+    padding: 24px 16px 40px 16px;
+  }
+
+  .app-store-button {
+    flex: 0 0 auto;
+  }
+
+  .store-button-image {
+    height: 40px !important; /* Smaller for mobile */
+    min-width: 120px; /* Smaller width */
+  }
+
+  .footer-download .store-buttons-container {
+    align-items: center;
+    flex-direction: column; /* Footer stays vertical */
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 380px) {
+  .store-buttons-container {
+    gap: 8px;
+    padding: 20px 12px 32px 12px;
+  }
+
+  .store-button-image {
+    height: 36px !important;
+    min-width: 110px;
   }
 }

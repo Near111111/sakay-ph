@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +8,16 @@ import "../styles/Navbar.css";
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAppDropdownOpen, setIsAppDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const { scrollY } = useScroll();
+
+  // Navigation items with custom routes
+  const navItems = [
+    { label: "HOME", href: "/" },
+    { label: "JOIN US", href: "/join-us" },
+    { label: "ABOUT US", href: "/Aboutus" },
+  ];
 
   // Keep it white always
   const navbarBg = useTransform(
@@ -28,8 +37,24 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsAppDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const toggleAppDropdown = () => {
+    setIsAppDropdownOpen(!isAppDropdownOpen);
   };
 
   return (
@@ -69,40 +94,56 @@ export default function Navbar() {
         </Link>
 
         <div className="navbar-menu">
-          {["HOME", "JOIN US", "ABOUT US"].map((item, index) => (
+          {navItems.map((item, index) => (
             <motion.div
-              key={item}
+              key={item.label}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Link
-                href={
-                  item === "HOME"
-                    ? "/"
-                    : `/${item.toLowerCase().replace(" ", "-")}`
-                }
-                className="navbar-link"
-              >
+              <Link href={item.href} className="navbar-link">
                 <motion.span
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  {item}
+                  {item.label}
                 </motion.span>
               </Link>
             </motion.div>
           ))}
 
+          {/* Get the app dropdown */}
           <motion.div
+            ref={dropdownRef}
+            className="app-dropdown-wrapper"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
-            <Link href="/get-app" className="navbar-cta-button">
+            <motion.button
+              className="navbar-cta-button"
+              onClick={toggleAppDropdown}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <span>Get the app</span>
+              <motion.svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                style={{ marginLeft: "8px" }}
+                animate={{ rotate: isAppDropdownOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <path
+                  d="M4 6L8 10L12 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </motion.svg>
               <motion.span
                 className="cta-shine"
                 initial={{ x: "-100%" }}
@@ -114,7 +155,45 @@ export default function Navbar() {
                   repeatDelay: 3,
                 }}
               />
-            </Link>
+            </motion.button>
+
+            {/* Dropdown Menu */}
+            {isAppDropdownOpen && (
+              <motion.div
+                className="app-dropdown-menu"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Link
+                  href="/get-app/driver"
+                  className="app-dropdown-item"
+                  onClick={() => setIsAppDropdownOpen(false)}
+                >
+                  <div className="dropdown-item-icon">🚗</div>
+                  <div>
+                    <div className="dropdown-item-title">Be a Driver</div>
+                    <div className="dropdown-item-subtitle">
+                      Start earning with Sakay
+                    </div>
+                  </div>
+                </Link>
+                <Link
+                  href="/get-app/passenger"
+                  className="app-dropdown-item"
+                  onClick={() => setIsAppDropdownOpen(false)}
+                >
+                  <div className="dropdown-item-icon">👤</div>
+                  <div>
+                    <div className="dropdown-item-title">Be a Passenger</div>
+                    <div className="dropdown-item-subtitle">
+                      Book your ride now
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            )}
           </motion.div>
         </div>
 
@@ -138,37 +217,44 @@ export default function Navbar() {
           exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.3 }}
         >
-          {["HOME", "JOIN US", "ABOUT US"].map((item, index) => (
+          {navItems.map((item, index) => (
             <motion.div
-              key={item}
+              key={item.label}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
             >
               <Link
-                href={
-                  item === "HOME"
-                    ? "/"
-                    : `/${item.toLowerCase().replace(" ", "-")}`
-                }
+                href={item.href}
                 className="mobile-menu-link"
                 onClick={toggleMobileMenu}
               >
-                {item}
+                {item.label}
               </Link>
             </motion.div>
           ))}
+
+          {/* Mobile Get the app options */}
           <motion.div
+            className="mobile-app-section"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
+            <div className="mobile-app-title">Get the app</div>
             <Link
-              href="/get-app"
+              href="/get-app/driver"
               className="mobile-cta-button"
               onClick={toggleMobileMenu}
             >
-              Get the app
+              🚗 Be a Driver
+            </Link>
+            <Link
+              href="/get-app/passenger"
+              className="mobile-cta-button mobile-cta-button-secondary"
+              onClick={toggleMobileMenu}
+            >
+              👤 Be a Passenger
             </Link>
           </motion.div>
         </motion.div>
