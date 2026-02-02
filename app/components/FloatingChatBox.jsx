@@ -82,6 +82,18 @@ About Sakay PH:
 - Real-time tracking
 - Competitive pricing with transparent fare calculation
 
+=== DEVELOPER INFORMATION ===
+When users ask "Who developed this?", "Who made this website/app?", "Who are the developers?", "Sino gumawa nito?", "Who created this?", or similar questions about the developers/creators, provide this information:
+
+This website was developed by:
+👨‍💻 **Jomar Aniñon**
+👨‍💻 **Jerimiah Wayne Sandoval**
+👨‍💻 **Andrei Zyrish Manuel**
+
+These talented developers created the Sakay PH web platform to provide users with easy access to ride-hailing services in Metro Manila.
+
+=== END OF DEVELOPER INFO ===
+
 Key Features:
 - Quick ride matching algorithm
 - Multiple stops support
@@ -119,7 +131,9 @@ Pagkatapos ma-activate, pwede ka nang tumanggap ng bookings at kumita sa Sakay P
 IMPORTANT - Customer Support Contact Information:
 When you cannot answer a question, when the user needs human assistance, or when they explicitly ask for customer support, provide these contact details:
 
-📞 Contact Number: 0927 557 8669
+📞 Contact Numbers: 
+   • 0918 438 3057
+   • 0927 557 8669
 📍 Address: 1 E. Gutierrez Panghulo, City of Malabon, Third District, National Capital Region, Malabon, Philippines, 1470
 📧 Email: inquiry@sakay-ph.com
 💬 Messenger: Sakay-Ph
@@ -211,7 +225,9 @@ Conversation so far:\n`;
 
 Please contact our customer support for further assistance:
 
-📞 Contact Number: 0927 557 8669
+📞 Contact Numbers: 
+   • 0918 438 3057
+   • 0927 557 8669
 📍 Address: 1 E. Gutierrez Panghulo, City of Malabon, Third District, National Capital Region, Malabon, Philippines, 1470
 📧 Email: inquiry@sakay-ph.com
 💬 Messenger: Sakay-Ph

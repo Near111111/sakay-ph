@@ -16,9 +16,9 @@ export default function LegalDocuments() {
       title: "Accreditation",
     },
     {
-      image: "/legal_docs/articles_of_corporation.png",
-      pdf: "/pdf_links/articles_of_corporation.pdf",
-      title: "Articles of Corporation",
+      image: "/legal_docs/certificate_of_acreditation.png",
+      pdf: "/pdf_links/certificate_of_acreditation.pdf",
+      title: "Certificate of Acreditation",
     },
     {
       image: "/legal_docs/business_permit.png",
