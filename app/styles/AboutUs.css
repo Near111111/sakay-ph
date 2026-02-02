@@ -1,0 +1,129 @@
+.about-us-container {
+  min-height: 100vh;
+  background: #fafafa;
+  padding: 140px 20px 80px 20px;
+  position: relative;
+}
+
+.about-us-content {
+  max-width: 800px;
+  margin: 0 auto 100px auto;
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.about-us-content h1 {
+  font-size: 4rem;
+  font-weight: 300;
+  color: #1a1a1a;
+  margin-bottom: 4rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-align: left;
+  position: relative;
+  padding-left: 0;
+}
+
+.about-us-content h1::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #8b5cf6 0%, #c4b5fd 100%);
+}
+
+.about-us-content p {
+  font-size: 1.125rem;
+  line-height: 2;
+  color: #525252;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.about-us-content p:first-of-type {
+  font-size: 1.25rem;
+  color: #404040;
+  font-weight: 400;
+}
+
+.about-us-content p:last-child {
+  margin-bottom: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tablet styles */
+@media (max-width: 768px) {
+  .about-us-container {
+    padding: 120px 24px 60px 24px;
+  }
+
+  .about-us-content {
+    margin-bottom: 80px;
+  }
+
+  .about-us-content h1 {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .about-us-content h1::after {
+    width: 50px;
+    height: 2.5px;
+  }
+
+  .about-us-content p {
+    font-size: 1.0625rem;
+    line-height: 1.9;
+    margin-bottom: 2.25rem;
+  }
+
+  .about-us-content p:first-of-type {
+    font-size: 1.1875rem;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .about-us-container {
+    padding: 100px 20px 50px 20px;
+  }
+
+  .about-us-content {
+    margin-bottom: 60px;
+  }
+
+  .about-us-content h1 {
+    font-size: 2.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .about-us-content h1::after {
+    width: 40px;
+    height: 2px;
+    bottom: -15px;
+  }
+
+  .about-us-content p {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .about-us-content p:first-of-type {
+    font-size: 1.0625rem;
+  }
+}

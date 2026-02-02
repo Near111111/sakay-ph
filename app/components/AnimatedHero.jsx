@@ -58,14 +58,28 @@ export default function AnimatedHero() {
           width: "100%",
           position: "relative",
           overflow: "hidden",
-          background: "#ffffff",
+          background: "transparent",
         }}
       >
         <div
           style={{
-            animation: "fadeInDown 1s ease-out",
+            position: "relative",
           }}
         >
+          {/* Subtle overlay for depth */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background:
+                "linear-gradient(to bottom, rgba(78, 39, 128, 0.05), transparent)",
+              pointerEvents: "none",
+              zIndex: 1,
+            }}
+          />
           <Image
             src="/sakay_header.png"
             alt="Sakay PH"
@@ -83,7 +97,15 @@ export default function AnimatedHero() {
         </div>
       </section>
 
-      <div style={{ animation: "fadeInUp 1s ease-out 0.2s backwards" }}>
+      {/* Buttons Section with White Background - Isolated */}
+      <div
+        style={{
+          background: "#ffffff",
+          padding: "24px 0 40px 0",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
         <AppleAndPlayStoreButton />
       </div>
 
@@ -95,18 +117,61 @@ export default function AnimatedHero() {
           alignItems: "center",
           justifyContent: "center",
           padding: "40px 20px 80px 20px",
-          background: "#ffffff",
+          background: "linear-gradient(to bottom, #ffffff, #fafbff)",
+          position: "relative",
         }}
       >
-        <div style={{ textAlign: "center", maxWidth: "900px" }}>
+        {/* Decorative background elements */}
+        <div
+          style={{
+            position: "absolute",
+            top: "10%",
+            left: "5%",
+            width: "300px",
+            height: "300px",
+            background:
+              "radial-gradient(circle, rgba(78, 39, 128, 0.08), transparent 70%)",
+            borderRadius: "50%",
+            filter: "blur(40px)",
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "10%",
+            right: "5%",
+            width: "250px",
+            height: "250px",
+            background:
+              "radial-gradient(circle, rgba(139, 92, 246, 0.06), transparent 70%)",
+            borderRadius: "50%",
+            filter: "blur(40px)",
+            pointerEvents: "none",
+          }}
+        />
+
+        <div
+          style={{
+            textAlign: "center",
+            maxWidth: "900px",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
           <h2
             style={{
               fontSize: "2.8rem",
-              fontWeight: "bold",
-              color: "#4e2780",
+              fontWeight: "800",
+              background: "linear-gradient(135deg, #4e2780 0%, #7c3aed 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
               marginBottom: "1.5rem",
               lineHeight: "1.4",
               minHeight: "120px",
+              letterSpacing: "-0.02em",
+              textShadow: "0 2px 20px rgba(78, 39, 128, 0.1)",
             }}
           >
             {headingText}
@@ -117,10 +182,12 @@ export default function AnimatedHero() {
           <p
             style={{
               fontSize: "1.25rem",
-              color: "#6b7280",
+              color: "#64748b",
               lineHeight: "1.8",
               marginBottom: "2rem",
               minHeight: "80px",
+              fontWeight: "400",
+              letterSpacing: "-0.01em",
             }}
           >
             {descriptionText}
@@ -134,17 +201,46 @@ export default function AnimatedHero() {
       {/* Image Carousel Section */}
       <section
         style={{
-          background: "linear-gradient(to bottom, #ffffff, #f9fafb)",
+          background: "linear-gradient(to bottom, #fafbff, #f8f9ff)",
           padding: "60px 20px",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
+        {/* Decorative elements */}
+        <div
+          style={{
+            position: "absolute",
+            top: "20%",
+            right: "10%",
+            width: "200px",
+            height: "200px",
+            background:
+              "radial-gradient(circle, rgba(78, 39, 128, 0.05), transparent 70%)",
+            borderRadius: "50%",
+            filter: "blur(50px)",
+            pointerEvents: "none",
+          }}
+        />
+
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "40px",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
           <h3
             style={{
               fontSize: "2.5rem",
-              fontWeight: "bold",
-              color: "#4e2780",
+              fontWeight: "800",
+              background: "linear-gradient(135deg, #4e2780 0%, #7c3aed 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
               marginBottom: "1rem",
+              letterSpacing: "-0.02em",
             }}
           >
             Gallery
@@ -152,41 +248,23 @@ export default function AnimatedHero() {
           <p
             style={{
               fontSize: "1.1rem",
-              color: "#6b7280",
+              color: "#64748b",
               maxWidth: "600px",
               margin: "0 auto",
+              lineHeight: "1.7",
+              fontWeight: "400",
             }}
           >
             Take a look at our fleet and see what makes Sakay PH the best choice
             for your transportation needs
           </p>
         </div>
-        <ImageCarousel />
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <ImageCarousel />
+        </div>
       </section>
 
       <style jsx>{`
-        @keyframes fadeInDown {
-          from {
-            opacity: 0;
-            transform: translateY(-30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
         @keyframes blink {
           0%,
           100% {
@@ -201,12 +279,48 @@ export default function AnimatedHero() {
           display: inline-block;
           margin-left: 2px;
           animation: blink 1s infinite;
-          color: #4e2780;
+          background: linear-gradient(135deg, #4e2780 0%, #7c3aed 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         h2,
         p {
           transition: all 0.3s ease;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          h2 {
+            font-size: 2rem !important;
+            min-height: 90px !important;
+          }
+
+          p {
+            font-size: 1.1rem !important;
+            min-height: 70px !important;
+          }
+
+          h3 {
+            font-size: 2rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          h2 {
+            font-size: 1.6rem !important;
+            min-height: 80px !important;
+          }
+
+          p {
+            font-size: 1rem !important;
+            min-height: 60px !important;
+          }
+
+          h3 {
+            font-size: 1.75rem !important;
+          }
         }
       `}</style>
     </>

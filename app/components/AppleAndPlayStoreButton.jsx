@@ -6,7 +6,7 @@ export default function AppleAndPlayStoreButton() {
     <div className="store-buttons-container">
       {/* Google Play Button */}
       <a
-        href="https://play.google.com/store"
+        href="https://play.google.com/store/apps/details?id=com.algovision.sakay_passengers&hl=en"
         target="_blank"
         rel="noopener noreferrer"
         className="app-store-button"
@@ -23,7 +23,7 @@ export default function AppleAndPlayStoreButton() {
 
       {/* App Store Button */}
       <a
-        href="https://apps.apple.com"
+        href="https://apps.apple.com/ph/app/sakayph/id6755413428"
         target="_blank"
         rel="noopener noreferrer"
         className="app-store-button"

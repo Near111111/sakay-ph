@@ -154,7 +154,7 @@ export default function OurServices() {
 
                 {/* Action Button */}
                 <button className="card-button">
-                  <span>Get the app</span>
+                  <span>Book now</span>
                   <svg
                     width="16"
                     height="16"

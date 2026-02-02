@@ -1,0 +1,288 @@
+/* MobileAppShowCase.css */
+
+.mobile-app-showcase {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("/mb_showcase.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  padding: 4rem 0;
+  overflow: hidden;
+}
+
+.mobile-app-showcase::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(to right, #ffffff);
+}
+
+.showcase-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6rem;
+}
+
+.showcase-left {
+  flex: 1;
+  max-width: 650px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.showcase-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: fadeInRight 1s ease-out 0.3s forwards;
+}
+
+/* Glowing title effect */
+.showcase-title {
+  font-size: 4.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 2rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(167, 139, 250, 0.4),
+    0 0 30px rgba(139, 92, 246, 0.3),
+    0 0 40px rgba(124, 58, 237, 0.2);
+  animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+.showcase-description {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 2.8s forwards;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 3.2s forwards;
+}
+
+.store-button {
+  height: 65px;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.store-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  opacity: 0.9;
+}
+
+.phone-mockup {
+  position: relative;
+  width: 100%;
+  max-width: 750px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.phone-image {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+.phone-image:hover {
+  transform: translateY(-10px);
+  animation-play-state: paused;
+}
+
+/* Animations */
+@keyframes textGlow {
+  0% {
+    text-shadow:
+      0 0 10px rgba(255, 255, 255, 0.5),
+      0 0 20px rgba(167, 139, 250, 0.4),
+      0 0 30px rgba(139, 92, 246, 0.3),
+      0 0 40px rgba(124, 58, 237, 0.2);
+  }
+  100% {
+    text-shadow:
+      0 0 20px rgba(255, 255, 255, 0.8),
+      0 0 30px rgba(167, 139, 250, 0.6),
+      0 0 40px rgba(139, 92, 246, 0.5),
+      0 0 50px rgba(124, 58, 237, 0.4),
+      0 0 60px rgba(109, 40, 217, 0.3);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* For larger screens */
+@media (min-width: 1600px) {
+  .showcase-content {
+    max-width: 1600px;
+  }
+
+  .showcase-title {
+    font-size: 5.5rem;
+  }
+
+  .showcase-description {
+    font-size: 1.75rem;
+  }
+
+  .store-button {
+    height: 75px;
+  }
+
+  .phone-mockup {
+    max-width: 900px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .showcase-content {
+    gap: 4rem;
+    padding: 0 2rem;
+  }
+
+  .showcase-title {
+    font-size: 3.5rem;
+  }
+
+  .showcase-description {
+    font-size: 1.25rem;
+  }
+
+  .store-button {
+    height: 55px;
+  }
+
+  .phone-mockup {
+    max-width: 600px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .mobile-app-showcase {
+    min-height: auto;
+    padding: 3rem 0;
+  }
+
+  .showcase-content {
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0 1.5rem;
+  }
+
+  .showcase-left {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .showcase-title {
+    font-size: 2.75rem;
+  }
+
+  .showcase-description {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+  }
+
+  .download-buttons {
+    justify-content: center;
+  }
+
+  .store-button {
+    height: 50px;
+  }
+
+  .phone-mockup {
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .showcase-title {
+    font-size: 2.25rem;
+  }
+
+  .showcase-description {
+    font-size: 1rem;
+  }
+
+  .store-button {
+    height: 45px;
+  }
+
+  .phone-mockup {
+    max-width: 100%;
+  }
+}

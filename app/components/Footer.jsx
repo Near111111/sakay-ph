@@ -30,13 +30,10 @@ const Footer = () => {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/Aboutus">About Us</Link>
+              <Link href="/about-us">About Us</Link>
             </li>
             <li>
               <Link href="/join-us">Join Us</Link>
-            </li>
-            <li>
-              <Link href="/get-app">Get the App</Link>
             </li>
           </ul>
         </div>
@@ -121,7 +118,7 @@ const Footer = () => {
 
       {/* Copyright */}
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Sakay PH. All rights reserved.</p>
+        <p>&copy; 2025 Sakay PH. All rights reserved.</p>
       </div>
     </footer>
   );

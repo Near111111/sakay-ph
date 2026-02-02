@@ -3,8 +3,8 @@
   justify-content: center;
   align-items: center;
   gap: 16px;
-  padding: 24px 20px 40px 20px;
-  background: #ffffff;
+  padding: 0; /* Removed padding since parent handles it */
+  background: transparent; /* Transparent since parent has white bg */
   flex-wrap: wrap;
 }
 
@@ -99,7 +99,7 @@
   .store-buttons-container {
     flex-direction: row; /* Changed to row para magkatabi */
     gap: 10px;
-    padding: 24px 16px 40px 16px;
+    padding: 0; /* Removed padding */
   }
 
   .app-store-button {
@@ -121,7 +121,7 @@
 @media (max-width: 380px) {
   .store-buttons-container {
     gap: 8px;
-    padding: 20px 12px 32px 12px;
+    padding: 0; /* Removed padding */
   }
 
   .store-button-image {

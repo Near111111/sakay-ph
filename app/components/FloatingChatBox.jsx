@@ -15,9 +15,13 @@ const FloatingChatBox = () => {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [cooldownTimer, setCooldownTimer] = useState(0);
+  const [canSend, setCanSend] = useState(true);
   const messagesEndRef = useRef(null);
+  const cooldownIntervalRef = useRef(null);
 
-  const GEMINI_API_KEY = "AIzaSyAe_AY3_JeqqcVrZlk_lFVIvcsNsyr_PVU";
+  const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+  const COOLDOWN_SECONDS = 3; // 3 seconds cooldown between messages
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -27,8 +31,16 @@ const FloatingChatBox = () => {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    return () => {
+      if (cooldownIntervalRef.current) {
+        clearInterval(cooldownIntervalRef.current);
+      }
+    };
+  }, []);
+
   const handleSendMessage = async () => {
-    if (!inputValue.trim() || isLoading) return;
+    if (!inputValue.trim() || isLoading || !canSend) return;
 
     const userMessage = inputValue.trim();
     setInputValue("");
@@ -36,6 +48,25 @@ const FloatingChatBox = () => {
     const newMessages = [...messages, { role: "user", content: userMessage }];
     setMessages(newMessages);
     setIsLoading(true);
+
+    // Start cooldown timer
+    setCanSend(false);
+    setCooldownTimer(COOLDOWN_SECONDS);
+
+    if (cooldownIntervalRef.current) {
+      clearInterval(cooldownIntervalRef.current);
+    }
+
+    cooldownIntervalRef.current = setInterval(() => {
+      setCooldownTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(cooldownIntervalRef.current);
+          setCanSend(true);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
 
     try {
       let conversationContext = `You are Sakay PH's AI assistant. Sakay PH is a ride-hailing company operating in Metro Manila, Philippines.
@@ -176,17 +207,16 @@ Conversation so far:\n`;
         throw new Error("Invalid response from Gemini API");
       }
     } catch (error) {
-      let errorMessage = "Sorry, may problema sa connection. Please try again.";
+      const errorMessage = `I apologize, but there's something wrong with the AI chat at the moment. 😔
 
-      if (error.message.includes("API Error: 400")) {
-        errorMessage = "Invalid API request. Please check your API key.";
-      } else if (error.message.includes("API Error: 403")) {
-        errorMessage = "API key is invalid or doesn't have permission.";
-      } else if (error.message.includes("API Error: 404")) {
-        errorMessage = "API endpoint not found. Please check the model name.";
-      } else if (error.message.includes("API Error: 429")) {
-        errorMessage = "Too many requests. Please wait a moment and try again.";
-      }
+Please contact our customer support for further assistance:
+
+📞 Contact Number: 0927 557 8669
+📍 Address: 1 E. Gutierrez Panghulo, City of Malabon, Third District, National Capital Region, Malabon, Philippines, 1470
+📧 Email: inquiry@sakay-ph.com
+💬 Messenger: Sakay-Ph
+
+Our team will be happy to help you! 🙂`;
 
       setMessages([
         ...newMessages,
@@ -405,27 +435,47 @@ Conversation so far:\n`;
                 <motion.button
                   className="send-button"
                   onClick={handleSendMessage}
-                  disabled={!inputValue.trim() || isLoading}
+                  disabled={!inputValue.trim() || isLoading || !canSend}
                   aria-label="Send message"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={
+                    canSend && inputValue.trim() ? { scale: 1.05 } : {}
+                  }
+                  whileTap={canSend && inputValue.trim() ? { scale: 0.95 } : {}}
                   transition={{ type: "spring", stiffness: 400 }}
+                  style={{
+                    opacity: !canSend ? 0.5 : 1,
+                    cursor:
+                      !canSend || !inputValue.trim()
+                        ? "not-allowed"
+                        : "pointer",
+                  }}
                 >
-                  <motion.svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    animate={!inputValue.trim() ? {} : { x: [0, 3, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5 }}
-                  >
-                    <line x1="22" y1="2" x2="11" y2="13" />
-                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                  </motion.svg>
+                  {!canSend && cooldownTimer > 0 ? (
+                    <motion.span
+                      className="cooldown-text"
+                      initial={{ scale: 0.8 }}
+                      animate={{ scale: 1 }}
+                      key={cooldownTimer}
+                    >
+                      {cooldownTimer}
+                    </motion.span>
+                  ) : (
+                    <motion.svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      animate={!inputValue.trim() ? {} : { x: [0, 3, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.5 }}
+                    >
+                      <line x1="22" y1="2" x2="11" y2="13" />
+                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </motion.svg>
+                  )}
                 </motion.button>
               </div>
             </motion.div>

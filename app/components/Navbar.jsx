@@ -9,14 +9,20 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAppDropdownOpen, setIsAppDropdownOpen] = useState(false);
+  const [isDriverStoreOpen, setIsDriverStoreOpen] = useState(false);
+  const [isPassengerStoreOpen, setIsPassengerStoreOpen] = useState(false);
+  const [isMobileDriverOpen, setIsMobileDriverOpen] = useState(false);
+  const [isMobilePassengerOpen, setIsMobilePassengerOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const driverStoreRef = useRef(null);
+  const passengerStoreRef = useRef(null);
   const { scrollY } = useScroll();
 
   // Navigation items with custom routes
   const navItems = [
     { label: "HOME", href: "/" },
     { label: "JOIN US", href: "/join-us" },
-    { label: "ABOUT US", href: "/Aboutus" },
+    { label: "ABOUT US", href: "/about-us" },
   ];
 
   // Keep it white always
@@ -43,6 +49,18 @@ export default function Navbar() {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsAppDropdownOpen(false);
       }
+      if (
+        driverStoreRef.current &&
+        !driverStoreRef.current.contains(event.target)
+      ) {
+        setIsDriverStoreOpen(false);
+      }
+      if (
+        passengerStoreRef.current &&
+        !passengerStoreRef.current.contains(event.target)
+      ) {
+        setIsPassengerStoreOpen(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -55,6 +73,20 @@ export default function Navbar() {
 
   const toggleAppDropdown = () => {
     setIsAppDropdownOpen(!isAppDropdownOpen);
+  };
+
+  const toggleDriverStore = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDriverStoreOpen(!isDriverStoreOpen);
+    setIsPassengerStoreOpen(false);
+  };
+
+  const togglePassengerStore = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsPassengerStoreOpen(!isPassengerStoreOpen);
+    setIsDriverStoreOpen(false);
   };
 
   return (
@@ -166,32 +198,139 @@ export default function Navbar() {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
               >
-                <Link
-                  href="/get-app/driver"
-                  className="app-dropdown-item"
-                  onClick={() => setIsAppDropdownOpen(false)}
-                >
-                  <div className="dropdown-item-icon">🚗</div>
-                  <div>
-                    <div className="dropdown-item-title">Be a Driver</div>
-                    <div className="dropdown-item-subtitle">
-                      Start earning with Sakay
+                {/* Driver Option */}
+                <div ref={driverStoreRef} className="store-option-wrapper">
+                  <div
+                    className="app-dropdown-item"
+                    onClick={toggleDriverStore}
+                  >
+                    <div className="dropdown-item-icon">🚗</div>
+                    <div style={{ flex: 1 }}>
+                      <div className="dropdown-item-title">Be a Driver</div>
+                      <div className="dropdown-item-subtitle">
+                        Start earning with Sakay
+                      </div>
                     </div>
+                    <motion.svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      animate={{ rotate: isDriverStoreOpen ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                      style={{ marginLeft: "8px" }}
+                    >
+                      <path
+                        d="M4 6L8 10L12 6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </motion.svg>
                   </div>
-                </Link>
-                <Link
-                  href="/get-app/passenger"
-                  className="app-dropdown-item"
-                  onClick={() => setIsAppDropdownOpen(false)}
-                >
-                  <div className="dropdown-item-icon">👤</div>
-                  <div>
-                    <div className="dropdown-item-title">Be a Passenger</div>
-                    <div className="dropdown-item-subtitle">
-                      Book your ride now
+
+                  {/* Driver Store Options */}
+                  {isDriverStoreOpen && (
+                    <motion.div
+                      className="store-submenu"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Link
+                        href="/get-app/driver/ios"
+                        className="store-link"
+                        onClick={() => {
+                          setIsAppDropdownOpen(false);
+                          setIsDriverStoreOpen(false);
+                        }}
+                      >
+                        <div className="store-icon">🍎</div>
+                        <span>App Store</span>
+                      </Link>
+                      <Link
+                        href="/get-app/driver/android"
+                        className="store-link"
+                        onClick={() => {
+                          setIsAppDropdownOpen(false);
+                          setIsDriverStoreOpen(false);
+                        }}
+                      >
+                        <div className="store-icon">📱</div>
+                        <span>Play Store</span>
+                      </Link>
+                    </motion.div>
+                  )}
+                </div>
+
+                {/* Passenger Option */}
+                <div ref={passengerStoreRef} className="store-option-wrapper">
+                  <div
+                    className="app-dropdown-item"
+                    onClick={togglePassengerStore}
+                  >
+                    <div className="dropdown-item-icon">👤</div>
+                    <div style={{ flex: 1 }}>
+                      <div className="dropdown-item-title">Be a Passenger</div>
+                      <div className="dropdown-item-subtitle">
+                        Book your ride now
+                      </div>
                     </div>
+                    <motion.svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      animate={{ rotate: isPassengerStoreOpen ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                      style={{ marginLeft: "8px" }}
+                    >
+                      <path
+                        d="M4 6L8 10L12 6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </motion.svg>
                   </div>
-                </Link>
+
+                  {/* Passenger Store Options */}
+                  {isPassengerStoreOpen && (
+                    <motion.div
+                      className="store-submenu"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Link
+                        href="/get-app/passenger/ios"
+                        className="store-link"
+                        onClick={() => {
+                          setIsAppDropdownOpen(false);
+                          setIsPassengerStoreOpen(false);
+                        }}
+                      >
+                        <div className="store-icon">🍎</div>
+                        <span>App Store</span>
+                      </Link>
+                      <Link
+                        href="/get-app/passenger/android"
+                        className="store-link"
+                        onClick={() => {
+                          setIsAppDropdownOpen(false);
+                          setIsPassengerStoreOpen(false);
+                        }}
+                      >
+                        <div className="store-icon">📱</div>
+                        <span>Play Store</span>
+                      </Link>
+                    </motion.div>
+                  )}
+                </div>
               </motion.div>
             )}
           </motion.div>
@@ -242,20 +381,130 @@ export default function Navbar() {
             transition={{ delay: 0.3 }}
           >
             <div className="mobile-app-title">Get the app</div>
-            <Link
-              href="/get-app/driver"
-              className="mobile-cta-button"
-              onClick={toggleMobileMenu}
-            >
-              🚗 Be a Driver
-            </Link>
-            <Link
-              href="/get-app/passenger"
-              className="mobile-cta-button mobile-cta-button-secondary"
-              onClick={toggleMobileMenu}
-            >
-              👤 Be a Passenger
-            </Link>
+
+            {/* Driver Section */}
+            <div className="mobile-store-section">
+              <motion.div
+                className="mobile-option-header"
+                onClick={() => {
+                  setIsMobileDriverOpen(!isMobileDriverOpen);
+                  setIsMobilePassengerOpen(false);
+                }}
+              >
+                <div className="mobile-option-content">
+                  <div className="mobile-option-icon">🚗</div>
+                  <div className="mobile-option-text">
+                    <div className="mobile-option-title">Be a Driver</div>
+                    <div className="mobile-option-subtitle">
+                      Start earning with Sakay
+                    </div>
+                  </div>
+                </div>
+                <motion.svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  animate={{ rotate: isMobileDriverOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <path
+                    d="M4 6L8 10L12 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </motion.svg>
+              </motion.div>
+
+              {isMobileDriverOpen && (
+                <motion.div
+                  className="mobile-store-links"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Link
+                    href="/get-app/driver/ios"
+                    className="mobile-cta-button"
+                    onClick={toggleMobileMenu}
+                  >
+                    🍎 App Store
+                  </Link>
+                  <Link
+                    href="/get-app/driver/android"
+                    className="mobile-cta-button"
+                    onClick={toggleMobileMenu}
+                  >
+                    📱 Play Store
+                  </Link>
+                </motion.div>
+              )}
+            </div>
+
+            {/* Passenger Section */}
+            <div className="mobile-store-section">
+              <motion.div
+                className="mobile-option-header"
+                onClick={() => {
+                  setIsMobilePassengerOpen(!isMobilePassengerOpen);
+                  setIsMobileDriverOpen(false);
+                }}
+              >
+                <div className="mobile-option-content">
+                  <div className="mobile-option-icon">👤</div>
+                  <div className="mobile-option-text">
+                    <div className="mobile-option-title">Be a Passenger</div>
+                    <div className="mobile-option-subtitle">
+                      Book your ride now
+                    </div>
+                  </div>
+                </div>
+                <motion.svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  animate={{ rotate: isMobilePassengerOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <path
+                    d="M4 6L8 10L12 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </motion.svg>
+              </motion.div>
+
+              {isMobilePassengerOpen && (
+                <motion.div
+                  className="mobile-store-links"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Link
+                    href="/get-app/passenger/ios"
+                    className="mobile-cta-button mobile-cta-button-secondary"
+                    onClick={toggleMobileMenu}
+                  >
+                    🍎 App Store
+                  </Link>
+                  <Link
+                    href="/get-app/passenger/android"
+                    className="mobile-cta-button mobile-cta-button-secondary"
+                    onClick={toggleMobileMenu}
+                  >
+                    📱 Play Store
+                  </Link>
+                </motion.div>
+              )}
+            </div>
           </motion.div>
         </motion.div>
       )}
