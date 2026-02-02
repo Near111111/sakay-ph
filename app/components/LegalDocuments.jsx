@@ -26,16 +26,6 @@ export default function LegalDocuments() {
       title: "Business Permit",
     },
     {
-      image: "/legal_docs/by_laws.png",
-      pdf: "/pdf_links/by_laws.pdf",
-      title: "By-Laws",
-    },
-    {
-      image: "/legal_docs/certificate_of_acreditation.png",
-      pdf: "/pdf_links/certificate_of_acreditation.pdf",
-      title: "Certificate of Accreditation",
-    },
-    {
       image: "/legal_docs/certificate_of_incorporation.png",
       pdf: "/pdf_links/certificate_of_incorporation.pdf",
       title: "Certificate of Incorporation",
