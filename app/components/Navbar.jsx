@@ -271,6 +271,8 @@ export default function Navbar() {
                     >
                       <Link
                         href="https://apps.apple.com/ph/app/sakayph-drivers/id6755422440"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="store-link"
                         onClick={() => {
                           setIsAppDropdownOpen(false);
@@ -282,6 +284,8 @@ export default function Navbar() {
                       </Link>
                       <Link
                         href="https://play.google.com/store/apps/details?id=com.algovision.sakay_driver&hl=en"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="store-link"
                         onClick={() => {
                           setIsAppDropdownOpen(false);
@@ -338,6 +342,8 @@ export default function Navbar() {
                     >
                       <Link
                         href="https://apps.apple.com/ph/app/sakayph/id6755413428"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="store-link"
                         onClick={() => {
                           setIsAppDropdownOpen(false);
@@ -349,6 +355,8 @@ export default function Navbar() {
                       </Link>
                       <Link
                         href="https://play.google.com/store/apps/details?id=com.algovision.sakay_passengers&hl=en"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="store-link"
                         onClick={() => {
                           setIsAppDropdownOpen(false);
@@ -487,6 +495,8 @@ export default function Navbar() {
                     >
                       <Link
                         href="https://apps.apple.com/ph/app/sakayph-drivers/id6755422440"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="mobile-cta-button"
                         onClick={toggleMobileMenu}
                       >
@@ -494,6 +504,8 @@ export default function Navbar() {
                       </Link>
                       <Link
                         href="https://play.google.com/store/apps/details?id=com.algovision.sakay_driver&hl=en"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="mobile-cta-button"
                         onClick={toggleMobileMenu}
                       >
@@ -549,6 +561,7 @@ export default function Navbar() {
                     >
                       <Link
                         href="https://apps.apple.com/ph/app/sakayph/id6755413428"
+                        target="_blank"
                         className="mobile-cta-button mobile-cta-button-secondary"
                         onClick={toggleMobileMenu}
                       >
@@ -556,6 +569,8 @@ export default function Navbar() {
                       </Link>
                       <Link
                         href="https://play.google.com/store/apps/details?id=com.algovision.sakay_passengers&hl=en"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="mobile-cta-button mobile-cta-button-secondary"
                         onClick={toggleMobileMenu}
                       >

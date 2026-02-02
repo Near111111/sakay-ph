@@ -44,11 +44,14 @@ const Footer = () => {
           <ul className="footer-contact">
             <li>
               <span className="contact-icon">📞</span>
-              <span>0927 557 8669</span>
+              <div>
+                <div>0918 438 3057</div>
+                <div style={{ marginTop: "4px" }}>0927 557 8669</div>
+              </div>
             </li>
             <li>
               <span className="contact-icon">📧</span>
-              <span>inquiry@sakay-ph.com</span>
+              <a href="mailto:inquiry@sakay-ph.com">inquiry@sakay-ph.com</a>
             </li>
             <li>
               <span className="contact-icon">📍</span>
