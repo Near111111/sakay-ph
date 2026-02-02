@@ -71,7 +71,6 @@ export default function JoinUs() {
                 <ul>
                   <li>Professional Driver’s License</li>
                   <li>Vehicle registration (OR/CR)</li>
-                  <li>Valid ID (Government-issued)</li>
                   <li>NBI/Police clearance</li>
                 </ul>
               </div>

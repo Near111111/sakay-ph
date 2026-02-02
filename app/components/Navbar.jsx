@@ -11,6 +11,7 @@ export default function Navbar() {
   const [isAppDropdownOpen, setIsAppDropdownOpen] = useState(false);
   const [isDriverStoreOpen, setIsDriverStoreOpen] = useState(false);
   const [isPassengerStoreOpen, setIsPassengerStoreOpen] = useState(false);
+  const [isMobileAppDropdownOpen, setIsMobileAppDropdownOpen] = useState(false);
   const [isMobileDriverOpen, setIsMobileDriverOpen] = useState(false);
   const [isMobilePassengerOpen, setIsMobilePassengerOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -69,6 +70,12 @@ export default function Navbar() {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+    // Reset all mobile dropdowns when closing menu
+    if (isMobileMenuOpen) {
+      setIsMobileAppDropdownOpen(false);
+      setIsMobileDriverOpen(false);
+      setIsMobilePassengerOpen(false);
+    }
   };
 
   const toggleAppDropdown = () => {
@@ -87,6 +94,29 @@ export default function Navbar() {
     e.stopPropagation();
     setIsPassengerStoreOpen(!isPassengerStoreOpen);
     setIsDriverStoreOpen(false);
+  };
+
+  const toggleMobileAppDropdown = () => {
+    setIsMobileAppDropdownOpen(!isMobileAppDropdownOpen);
+    // Close driver and passenger when closing main dropdown
+    if (isMobileAppDropdownOpen) {
+      setIsMobileDriverOpen(false);
+      setIsMobilePassengerOpen(false);
+    }
+  };
+
+  const toggleMobileDriver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsMobileDriverOpen(!isMobileDriverOpen);
+    setIsMobilePassengerOpen(false);
+  };
+
+  const toggleMobilePassenger = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsMobilePassengerOpen(!isMobilePassengerOpen);
+    setIsMobileDriverOpen(false);
   };
 
   return (
@@ -240,7 +270,7 @@ export default function Navbar() {
                       transition={{ duration: 0.2 }}
                     >
                       <Link
-                        href="/get-app/driver/ios"
+                        href="https://apps.apple.com/ph/app/sakayph-drivers/id6755422440"
                         className="store-link"
                         onClick={() => {
                           setIsAppDropdownOpen(false);
@@ -251,7 +281,7 @@ export default function Navbar() {
                         <span>App Store</span>
                       </Link>
                       <Link
-                        href="/get-app/driver/android"
+                        href="https://play.google.com/store/apps/details?id=com.algovision.sakay_driver&hl=en"
                         className="store-link"
                         onClick={() => {
                           setIsAppDropdownOpen(false);
@@ -307,7 +337,7 @@ export default function Navbar() {
                       transition={{ duration: 0.2 }}
                     >
                       <Link
-                        href="/get-app/passenger/ios"
+                        href="https://apps.apple.com/ph/app/sakayph/id6755413428"
                         className="store-link"
                         onClick={() => {
                           setIsAppDropdownOpen(false);
@@ -318,7 +348,7 @@ export default function Navbar() {
                         <span>App Store</span>
                       </Link>
                       <Link
-                        href="/get-app/passenger/android"
+                        href="https://play.google.com/store/apps/details?id=com.algovision.sakay_passengers&hl=en"
                         className="store-link"
                         onClick={() => {
                           setIsAppDropdownOpen(false);
@@ -373,138 +403,169 @@ export default function Navbar() {
             </motion.div>
           ))}
 
-          {/* Mobile Get the app options */}
+          {/* Mobile Get the app section with collapsible functionality */}
           <motion.div
             className="mobile-app-section"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <div className="mobile-app-title">Get the app</div>
-
-            {/* Driver Section */}
-            <div className="mobile-store-section">
-              <motion.div
-                className="mobile-option-header"
-                onClick={() => {
-                  setIsMobileDriverOpen(!isMobileDriverOpen);
-                  setIsMobilePassengerOpen(false);
-                }}
+            <motion.button
+              className="mobile-app-toggle"
+              onClick={toggleMobileAppDropdown}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span>Get the app</span>
+              <motion.svg
+                width="20"
+                height="20"
+                viewBox="0 0 16 16"
+                fill="none"
+                animate={{ rotate: isMobileAppDropdownOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="mobile-option-content">
-                  <div className="mobile-option-icon">🚗</div>
-                  <div className="mobile-option-text">
-                    <div className="mobile-option-title">Be a Driver</div>
-                    <div className="mobile-option-subtitle">
-                      Start earning with Sakay
-                    </div>
-                  </div>
-                </div>
-                <motion.svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  animate={{ rotate: isMobileDriverOpen ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <path
-                    d="M4 6L8 10L12 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </motion.svg>
-              </motion.div>
+                <path
+                  d="M4 6L8 10L12 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </motion.svg>
+            </motion.button>
 
-              {isMobileDriverOpen && (
-                <motion.div
-                  className="mobile-store-links"
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Link
-                    href="/get-app/driver/ios"
-                    className="mobile-cta-button"
-                    onClick={toggleMobileMenu}
-                  >
-                    🍎 App Store
-                  </Link>
-                  <Link
-                    href="/get-app/driver/android"
-                    className="mobile-cta-button"
-                    onClick={toggleMobileMenu}
-                  >
-                    📱 Play Store
-                  </Link>
-                </motion.div>
-              )}
-            </div>
-
-            {/* Passenger Section */}
-            <div className="mobile-store-section">
+            {/* Show app options only when dropdown is open */}
+            {isMobileAppDropdownOpen && (
               <motion.div
-                className="mobile-option-header"
-                onClick={() => {
-                  setIsMobilePassengerOpen(!isMobilePassengerOpen);
-                  setIsMobileDriverOpen(false);
-                }}
+                className="mobile-app-options"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="mobile-option-content">
-                  <div className="mobile-option-icon">👤</div>
-                  <div className="mobile-option-text">
-                    <div className="mobile-option-title">Be a Passenger</div>
-                    <div className="mobile-option-subtitle">
-                      Book your ride now
+                {/* Driver Section */}
+                <div className="mobile-store-section">
+                  <motion.div
+                    className="mobile-option-header"
+                    onClick={toggleMobileDriver}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="mobile-option-content">
+                      <div className="mobile-option-icon">🚗</div>
+                      <div className="mobile-option-text">
+                        <div className="mobile-option-title">Be a Driver</div>
+                        <div className="mobile-option-subtitle">
+                          Start earning with Sakay
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <motion.svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  animate={{ rotate: isMobilePassengerOpen ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <path
-                    d="M4 6L8 10L12 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </motion.svg>
-              </motion.div>
+                    <motion.svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      animate={{ rotate: isMobileDriverOpen ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <path
+                        d="M4 6L8 10L12 6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </motion.svg>
+                  </motion.div>
 
-              {isMobilePassengerOpen && (
-                <motion.div
-                  className="mobile-store-links"
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Link
-                    href="/get-app/passenger/ios"
-                    className="mobile-cta-button mobile-cta-button-secondary"
-                    onClick={toggleMobileMenu}
+                  {isMobileDriverOpen && (
+                    <motion.div
+                      className="mobile-store-links"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Link
+                        href="https://apps.apple.com/ph/app/sakayph-drivers/id6755422440"
+                        className="mobile-cta-button"
+                        onClick={toggleMobileMenu}
+                      >
+                        🍎 App Store
+                      </Link>
+                      <Link
+                        href="https://play.google.com/store/apps/details?id=com.algovision.sakay_driver&hl=en"
+                        className="mobile-cta-button"
+                        onClick={toggleMobileMenu}
+                      >
+                        📱 Play Store
+                      </Link>
+                    </motion.div>
+                  )}
+                </div>
+
+                {/* Passenger Section */}
+                <div className="mobile-store-section">
+                  <motion.div
+                    className="mobile-option-header"
+                    onClick={toggleMobilePassenger}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    🍎 App Store
-                  </Link>
-                  <Link
-                    href="/get-app/passenger/android"
-                    className="mobile-cta-button mobile-cta-button-secondary"
-                    onClick={toggleMobileMenu}
-                  >
-                    📱 Play Store
-                  </Link>
-                </motion.div>
-              )}
-            </div>
+                    <div className="mobile-option-content">
+                      <div className="mobile-option-icon">👤</div>
+                      <div className="mobile-option-text">
+                        <div className="mobile-option-title">
+                          Be a Passenger
+                        </div>
+                        <div className="mobile-option-subtitle">
+                          Book your ride now
+                        </div>
+                      </div>
+                    </div>
+                    <motion.svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      animate={{ rotate: isMobilePassengerOpen ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <path
+                        d="M4 6L8 10L12 6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </motion.svg>
+                  </motion.div>
+
+                  {isMobilePassengerOpen && (
+                    <motion.div
+                      className="mobile-store-links"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Link
+                        href="https://apps.apple.com/ph/app/sakayph/id6755413428"
+                        className="mobile-cta-button mobile-cta-button-secondary"
+                        onClick={toggleMobileMenu}
+                      >
+                        🍎 App Store
+                      </Link>
+                      <Link
+                        href="https://play.google.com/store/apps/details?id=com.algovision.sakay_passengers&hl=en"
+                        className="mobile-cta-button mobile-cta-button-secondary"
+                        onClick={toggleMobileMenu}
+                      >
+                        📱 Play Store
+                      </Link>
+                    </motion.div>
+                  )}
+                </div>
+              </motion.div>
+            )}
           </motion.div>
         </motion.div>
       )}

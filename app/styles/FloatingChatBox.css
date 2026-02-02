@@ -33,7 +33,7 @@ body {
   justify-content: center;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .chat-button:hover {
@@ -152,15 +152,15 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: white;
-  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   position: relative;
+  backdrop-filter: blur(10px);
 }
 
 .close-button::before,
@@ -169,7 +169,7 @@ body {
   position: absolute;
   width: 18px;
   height: 2.5px;
-  background-color: #4e2780;
+  background-color: white;
   border-radius: 2px;
 }
 
@@ -182,14 +182,14 @@ body {
 }
 
 .close-button:hover {
-  background: #f3f4f6;
+  background: rgba(255, 255, 255, 0.3);
   transform: scale(1.1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .close-button:hover::before,
 .close-button:hover::after {
-  background-color: #3d1f65;
+  background-color: white;
 }
 
 .chat-messages {
@@ -697,6 +697,7 @@ body {
     display: none;
   }
 }
+
 .chat-button {
   width: auto;
   min-width: 180px;
