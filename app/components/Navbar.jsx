@@ -44,6 +44,22 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock/unlock body scroll when mobile menu opens/closes
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      // Lock scroll
+      document.body.style.overflow = "hidden";
+    } else {
+      // Unlock scroll
+      document.body.style.overflow = "unset";
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -67,6 +83,14 @@ export default function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Smooth scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -133,7 +157,7 @@ export default function Navbar() {
       />
 
       <div className="navbar-container">
-        <Link href="/" className="navbar-logo-link">
+        <div className="navbar-logo-link" onClick={scrollToTop}>
           <motion.div
             whileHover={{ scale: 1.05, rotate: 5 }}
             whileTap={{ scale: 0.95 }}
@@ -153,7 +177,7 @@ export default function Navbar() {
           >
             SAKAY-PH
           </motion.span>
-        </Link>
+        </div>
 
         <div className="navbar-menu">
           {navItems.map((item, index) => (

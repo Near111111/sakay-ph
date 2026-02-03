@@ -10,15 +10,15 @@ export default function FloatingAnnouncement() {
   const announcements = [
     {
       id: 1,
-      title: "New Service Launch! 🚗",
+      title: "New Service Launch!",
       date: "Feb 12, 2026",
       message: "Motorcade/on-boarding event!",
     },
     {
       id: 2,
       title: "Promo Alert! 🎉",
-      date: "NO INFO.",
-      message: "No promo yet",
+      date: "P30 DISCOUNT!",
+      message: "USE CODE: SAKAYNA30",
     },
     {
       id: 3,

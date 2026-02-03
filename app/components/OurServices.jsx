@@ -33,6 +33,22 @@ export default function OurServices() {
     };
   }, []);
 
+  // Lock/unlock body scroll when modal opens/closes
+  useEffect(() => {
+    if (selectedService) {
+      // Lock scroll
+      document.body.style.overflow = "hidden";
+    } else {
+      // Unlock scroll
+      document.body.style.overflow = "unset";
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedService]);
+
   useEffect(() => {
     const handleMouseMove = (e) => {
       cardsRef.current.forEach((card) => {
