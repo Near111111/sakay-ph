@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import AppleAndPlayStoreButton from "./AppleAndPlayStoreButton";
 import ImageCarousel from "./ImageCarousel";
@@ -9,6 +9,8 @@ export default function AnimatedHero() {
   const [headingText, setHeadingText] = useState("");
   const [descriptionText, setDescriptionText] = useState("");
   const [showCursor, setShowCursor] = useState(true);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const contentRef = useRef(null);
 
   const fullHeading =
     "SAKAY na sa bagong ride hailing app SAKAY-PH para satin to!";
@@ -16,6 +18,34 @@ export default function AnimatedHero() {
     "Experience safe, reliable, and affordable transportation with Sakay PH. Book your ride today and get to your destination with ease.";
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Trigger animation when section is visible and hasn't animated yet
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true);
+            startTypewriterEffect();
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the section is visible
+        rootMargin: "0px",
+      },
+    );
+
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
+
+    return () => {
+      if (contentRef.current) {
+        observer.unobserve(contentRef.current);
+      }
+    };
+  }, [hasAnimated]);
+
+  const startTypewriterEffect = () => {
     let headingIndex = 0;
     let descriptionIndex = 0;
 
@@ -43,74 +73,13 @@ export default function AnimatedHero() {
         }, 300); // Delay before starting description
       }
     }, 50); // Speed ng typing para sa heading
-
-    return () => {
-      clearInterval(headingInterval);
-    };
-  }, []);
+  };
 
   return (
     <>
-      {/* Hero Section with Header Image */}
-      <section
-        style={{
-          marginTop: "72px",
-          width: "100%",
-          position: "relative",
-          overflow: "hidden",
-          background: "transparent",
-        }}
-      >
-        <div
-          style={{
-            position: "relative",
-          }}
-        >
-          {/* Subtle overlay for depth */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background:
-                "linear-gradient(to bottom, rgba(78, 39, 128, 0.05), transparent)",
-              pointerEvents: "none",
-              zIndex: 1,
-            }}
-          />
-          <Image
-            src="/sakay_header.png"
-            alt="Sakay PH"
-            width={1920}
-            height={500}
-            style={{
-              width: "100%",
-              height: "auto",
-              display: "block",
-            }}
-            quality={100}
-            unoptimized
-            priority
-          />
-        </div>
-      </section>
-
-      {/* Buttons Section with White Background - Isolated */}
-      <div
-        style={{
-          background: "#ffffff",
-          padding: "24px 0 40px 0",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        <AppleAndPlayStoreButton />
-      </div>
-
       {/* Content Section */}
       <div
+        ref={contentRef}
         style={{
           minHeight: "calc(100vh - 572px)",
           display: "flex",
@@ -197,6 +166,51 @@ export default function AnimatedHero() {
           </p>
         </div>
       </div>
+
+      {/* Hero Section with Header Image (Map) */}
+      <section
+        style={{
+          width: "100%",
+          position: "relative",
+          overflow: "hidden",
+          background: "transparent",
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+          }}
+        >
+          {/* Subtle overlay for depth */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background:
+                "linear-gradient(to bottom, rgba(78, 39, 128, 0.05), transparent)",
+              pointerEvents: "none",
+              zIndex: 1,
+            }}
+          />
+          <Image
+            src="/coming_soon.png"
+            alt="Sakay PH"
+            width={1920}
+            height={500}
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "block",
+            }}
+            quality={100}
+            unoptimized
+            priority
+          />
+        </div>
+      </section>
 
       {/* Image Carousel Section */}
       <section

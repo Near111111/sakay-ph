@@ -157,10 +157,10 @@ Step 6: Track your ride - Monitor your drivers location and go to the pick-up po
           <div className="blob blob-3"></div>
         </div>
 
-        {/* Background Image */}
+        {/* Background Image - VIOLET MAP BACKGROUND */}
         <div className="background-container">
           <Image
-            src="/services_bg.png"
+            src="/mb_showcase.png"
             alt="Our Services Background"
             fill
             style={{
