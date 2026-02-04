@@ -87,7 +87,7 @@ When users ask "Who developed this?", "Who made this website/app?", "Who are the
 
 This website was developed by:
 👨‍💻 **Jomar Aniñon**
-👨‍💻 **Jerimiah Wayne Sandoval**
+👨‍💻 **Jeremiah Wayne Sandoval**
 👨‍💻 **Andrei Zyrish Manuel**
 
 These talented developers created the Sakay PH web platform to provide users with easy access to ride-hailing services in Metro Manila.

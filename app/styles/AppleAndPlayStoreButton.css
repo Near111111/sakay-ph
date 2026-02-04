@@ -3,8 +3,8 @@
   justify-content: center;
   align-items: center;
   gap: 16px;
-  padding: 0; /* Removed padding since parent handles it */
-  background: transparent; /* Transparent since parent has white bg */
+  padding: 0;
+  background: transparent;
   flex-wrap: wrap;
 }
 
@@ -18,6 +18,9 @@
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 /* Hover scale */
@@ -72,7 +75,6 @@
 }
 
 /* ===== FOOTER OVERRIDES ===== */
-/* When inside footer, remove white background and adjust layout */
 .footer-download .store-buttons-container {
   background: transparent !important;
   padding: 0 !important;
@@ -94,12 +96,193 @@
   background: #ffffff;
 }
 
+/* ===== QR MODAL STYLES ===== */
+/* CRITICAL: Super high z-index to cover navbar and chat box */
+.qr-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2147483647 !important;
+  animation: fadeIn 0.3s ease-in-out;
+  padding: 1rem;
+}
+
+/* Force modal to be on top of EVERYTHING */
+body:has(.qr-modal-overlay) {
+  overflow: hidden !important;
+}
+
+.qr-modal-overlay * {
+  z-index: 2147483647 !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.qr-modal-content {
+  background: white;
+  padding: 3rem 2.5rem;
+  border-radius: 24px;
+  max-width: 700px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2147483647 !important;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.qr-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2.5rem;
+  background: #f3f4f6;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  line-height: 1;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 2147483647 !important;
+  font-weight: 300;
+}
+
+.qr-modal-close:hover {
+  background: #e5e7eb;
+  color: #000;
+  transform: rotate(90deg);
+}
+
+.qr-modal-content h2 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  margin-top: 0.5rem;
+  color: #1f2937;
+  font-size: 2rem;
+  font-weight: 700;
+  padding-right: 0;
+}
+
+.qr-codes-container {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.qr-code-item {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 220px;
+  max-width: 280px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.qr-code-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+}
+
+.qr-code-item h3 {
+  margin-bottom: 1.5rem;
+  color: #374151;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.qr-code-item img {
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  height: auto;
+  max-width: 220px;
+  border: 3px solid white;
+}
+
 /* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .qr-modal-content {
+    padding: 2.5rem 1.5rem;
+    max-width: 95%;
+    width: 95%;
+  }
+
+  .qr-modal-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .qr-codes-container {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .qr-code-item {
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: unset;
+  }
+
+  .qr-code-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .qr-modal-close {
+    width: 40px;
+    height: 40px;
+    font-size: 2.2rem;
+    top: 15px;
+    right: 15px;
+  }
+
+  .qr-code-item img {
+    max-width: 200px;
+  }
+}
+
 @media (max-width: 600px) {
   .store-buttons-container {
-    flex-direction: row; /* Changed to row para magkatabi */
+    flex-direction: row;
     gap: 10px;
-    padding: 0; /* Removed padding */
+    padding: 0;
   }
 
   .app-store-button {
@@ -107,13 +290,48 @@
   }
 
   .store-button-image {
-    height: 40px !important; /* Smaller for mobile */
-    min-width: 120px; /* Smaller width */
+    height: 40px !important;
+    min-width: 120px;
   }
 
   .footer-download .store-buttons-container {
     align-items: center;
-    flex-direction: column; /* Footer stays vertical */
+    flex-direction: column;
+  }
+
+  .qr-modal-content {
+    padding: 2rem 1.25rem;
+  }
+
+  .qr-modal-content h2 {
+    font-size: 1.4rem;
+  }
+
+  .qr-code-item {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .qr-modal-content {
+    padding: 1.75rem 1rem;
+  }
+
+  .qr-modal-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .qr-code-item h3 {
+    font-size: 1.1rem;
+  }
+
+  .qr-codes-container {
+    gap: 1.5rem;
+  }
+
+  .qr-code-item img {
+    max-width: 180px;
   }
 }
 
@@ -121,11 +339,21 @@
 @media (max-width: 380px) {
   .store-buttons-container {
     gap: 8px;
-    padding: 0; /* Removed padding */
+    padding: 0;
   }
 
   .store-button-image {
     height: 36px !important;
     min-width: 110px;
+  }
+
+  .qr-modal-content {
+    padding: 1.5rem 0.875rem;
+  }
+
+  .qr-modal-close {
+    width: 36px;
+    height: 36px;
+    font-size: 2rem;
   }
 }

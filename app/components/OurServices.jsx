@@ -193,9 +193,6 @@ Step 6: Track your ride - Monitor your drivers location and go to the pick-up po
                 <div className="card-border"></div>
 
                 <div className="card-inner">
-                  {/* Icon Badge */}
-                  <div className="icon-badge">{service.icon}</div>
-
                   {/* Image with Glow */}
                   <div className="card-image-wrapper">
                     <div className="image-glow"></div>

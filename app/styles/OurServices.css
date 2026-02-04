@@ -214,21 +214,6 @@
   opacity: 1;
 }
 
-/* Icon Badge - No Animation */
-.icon-badge {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 1.75rem;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
-  transition: transform 0.3s ease;
-  pointer-events: none;
-}
-
-.service-card:hover .icon-badge {
-  transform: scale(1.1);
-}
-
 /* Image Wrapper - Minimal Animation */
 .card-image-wrapper {
   position: relative;
@@ -442,13 +427,14 @@
 
 .instructions-text {
   background: #f9fafb;
-  padding: 20px;
+  padding: 24px;
   border-radius: 10px;
   color: #4b5563;
-  font-size: 0.9rem;
-  line-height: 1.7;
+  font-size: 0.95rem;
+  line-height: 1.9;
   white-space: pre-line;
   border-left: 3px solid #8b5cf6;
+  letter-spacing: 0.3px;
 }
 
 .modal-footer {
@@ -511,10 +497,6 @@
     font-size: 1.5rem;
   }
 
-  .icon-badge {
-    font-size: 1.5rem;
-  }
-
   /* Modal Mobile */
   .modal-content {
     border-radius: 16px;
@@ -548,8 +530,9 @@
   }
 
   .instructions-text {
-    font-size: 0.875rem;
-    padding: 16px;
+    font-size: 0.9rem;
+    padding: 20px;
+    line-height: 1.85;
   }
 
   .modal-footer {
@@ -559,25 +542,5 @@
   .proceed-button {
     font-size: 0.9375rem;
     padding: 12px 28px;
-  }
-}
-.instructions-text {
-  background: #f9fafb;
-  padding: 24px;
-  border-radius: 10px;
-  color: #4b5563;
-  font-size: 0.95rem;
-  line-height: 1.9;
-  white-space: pre-line;
-  border-left: 3px solid #8b5cf6;
-  letter-spacing: 0.3px;
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .instructions-text {
-    font-size: 0.9rem;
-    padding: 20px;
-    line-height: 1.85;
   }
 }

@@ -55,6 +55,7 @@
 .showcase-right {
   flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   opacity: 0;
@@ -115,6 +116,31 @@
   opacity: 1;
 }
 
+/* QR Code Hint Text */
+.qr-code-hint {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.95);
+  margin-top: 1.25rem;
+  font-weight: 400;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.8s ease-out 1s;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.showcase-left.animate .qr-code-hint {
+  opacity: 1;
+}
+
 .store-button {
   height: 65px;
   transition:
@@ -135,23 +161,76 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+}
+
+/* Carousel container */
+.phone-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .phone-image {
   width: 100%;
   height: auto;
   filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.3));
-  transition: transform 0.3s ease;
+  transition:
+    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateX(50px);
+  pointer-events: none;
+  position: absolute;
 }
 
-.showcase-right.animate .phone-image {
-  animation: float 3s ease-in-out infinite;
+/* Specific sizing for legal document images */
+.phone-image[alt*="Screen 2"],
+.phone-image[alt*="Screen 3"] {
+  max-height: 800px;
+  max-width: 400px;
+  object-fit: contain;
 }
 
-.phone-image:hover {
-  transform: translateY(-10px);
-  animation-play-state: paused;
+.phone-image.active {
+  opacity: 1;
+  transform: translateX(0);
+  position: relative;
+  pointer-events: auto;
+}
+
+/* Carousel indicators */
+.carousel-indicators {
+  display: flex;
+  gap: 12px;
+  margin-top: 2rem;
+  justify-content: center;
+  z-index: 10;
+}
+
+.carousel-indicators .indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-indicators .indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
+}
+
+.carousel-indicators .indicator.active {
+  background: #ffffff;
+  border-color: #ffffff;
+  width: 32px;
+  border-radius: 6px;
 }
 
 /* Animations */
@@ -170,16 +249,6 @@
       0 0 40px rgba(139, 92, 246, 0.5),
       0 0 50px rgba(124, 58, 237, 0.4),
       0 0 60px rgba(109, 40, 217, 0.3);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
   }
 }
 
@@ -204,6 +273,11 @@
   .phone-mockup {
     max-width: 900px;
   }
+
+  .qr-code-hint {
+    font-size: 1.15rem;
+    padding: 0.85rem 1.75rem;
+  }
 }
 
 /* Tablet */
@@ -227,6 +301,24 @@
 
   .phone-mockup {
     max-width: 600px;
+  }
+
+  .qr-code-hint {
+    font-size: 1rem;
+    padding: 0.7rem 1.25rem;
+  }
+
+  .carousel-indicators {
+    margin-top: 1.5rem;
+  }
+
+  .carousel-indicators .indicator {
+    width: 10px;
+    height: 10px;
+  }
+
+  .carousel-indicators .indicator.active {
+    width: 28px;
   }
 }
 
@@ -269,6 +361,16 @@
   .phone-mockup {
     max-width: 500px;
   }
+
+  .carousel-indicators {
+    margin-top: 1.5rem;
+  }
+
+  .qr-code-hint {
+    font-size: 0.95rem;
+    padding: 0.65rem 1rem;
+    max-width: 90%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -286,5 +388,25 @@
 
   .phone-mockup {
     max-width: 100%;
+  }
+
+  .carousel-indicators {
+    margin-top: 1.25rem;
+    gap: 10px;
+  }
+
+  .carousel-indicators .indicator {
+    width: 8px;
+    height: 8px;
+  }
+
+  .carousel-indicators .indicator.active {
+    width: 24px;
+  }
+
+  .qr-code-hint {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.875rem;
+    margin-top: 1rem;
   }
 }
