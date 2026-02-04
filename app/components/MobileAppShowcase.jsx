@@ -19,7 +19,7 @@ export default function MobileAppShowcase() {
   ];
 
   // Custom timing: 2s, 10s, 10s, repeat
-  const slideTimings = [5000, 10000, 10000]; // milliseconds
+  const slideTimings = [3000, 10000, 10000]; // milliseconds
 
   // Auto-slide effect with custom timing pattern
   useEffect(() => {
