@@ -196,7 +196,7 @@ export default function AnimatedHero() {
             }}
           />
           <Image
-            src="/coming_soon.png"
+            src="/coming_soon_area.png"
             alt="Sakay PH"
             width={1920}
             height={500}
@@ -236,43 +236,6 @@ export default function AnimatedHero() {
             pointerEvents: "none",
           }}
         />
-
-        <div
-          style={{
-            textAlign: "center",
-            marginBottom: "40px",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          <h3
-            style={{
-              fontSize: "2.5rem",
-              fontWeight: "800",
-              background: "linear-gradient(135deg, #4e2780 0%, #7c3aed 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              marginBottom: "1rem",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Gallery
-          </h3>
-          <p
-            style={{
-              fontSize: "1.1rem",
-              color: "#64748b",
-              maxWidth: "600px",
-              margin: "0 auto",
-              lineHeight: "1.7",
-              fontWeight: "400",
-            }}
-          >
-            Take a look at our fleet and see what makes Sakay PH the best choice
-            for your transportation needs
-          </p>
-        </div>
         <div style={{ position: "relative", zIndex: 1 }}>
           <ImageCarousel />
         </div>
