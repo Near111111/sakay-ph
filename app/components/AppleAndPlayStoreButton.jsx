@@ -8,6 +8,7 @@ import "../styles/AppleAndPlayStoreButton.css";
 export default function AppleAndPlayStoreButton() {
   const [showModal, setShowModal] = useState(false);
   const [qrImages, setQrImages] = useState({ driver: "", passenger: "" });
+  const [qrLinks, setQrLinks] = useState({ driver: "", passenger: "" });
   const [modalTitle, setModalTitle] = useState("");
 
   // Lock/unlock scroll when modal opens/closes
@@ -27,6 +28,12 @@ export default function AppleAndPlayStoreButton() {
       driver: "/qr_pictures/google_driver_qr.png",
       passenger: "/qr_pictures/google_passenger_qr.png",
     });
+    setQrLinks({
+      driver:
+        "https://play.google.com/store/apps/details?id=com.algovision.sakay_driver&hl=en",
+      passenger:
+        "https://play.google.com/store/apps/details?id=com.algovision.sakay_passengers&hl=en",
+    });
     setModalTitle("Google Play Store");
     setShowModal(true);
   };
@@ -35,6 +42,10 @@ export default function AppleAndPlayStoreButton() {
     setQrImages({
       driver: "/qr_pictures/ios_driver_qr.png",
       passenger: "/qr_pictures/ios_passenger_qr.png",
+    });
+    setQrLinks({
+      driver: "https://apps.apple.com/ph/app/sakayph-drivers/id6755422440",
+      passenger: "https://apps.apple.com/ph/app/sakayph/id6755413428",
     });
     setModalTitle("App Store");
     setShowModal(true);
@@ -87,21 +98,35 @@ export default function AppleAndPlayStoreButton() {
               <div className="qr-codes-container">
                 <div className="qr-code-item">
                   <h3>Driver App</h3>
-                  <Image
-                    src={qrImages.driver}
-                    alt="Driver QR Code"
-                    width={200}
-                    height={200}
-                  />
+                  <a
+                    href={qrLinks.driver}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src={qrImages.driver}
+                      alt="Driver QR Code"
+                      width={200}
+                      height={200}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </a>
                 </div>
                 <div className="qr-code-item">
                   <h3>Passenger App</h3>
-                  <Image
-                    src={qrImages.passenger}
-                    alt="Passenger QR Code"
-                    width={200}
-                    height={200}
-                  />
+                  <a
+                    href={qrLinks.passenger}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src={qrImages.passenger}
+                      alt="Passenger QR Code"
+                      width={200}
+                      height={200}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </a>
                 </div>
               </div>
             </div>
