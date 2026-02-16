@@ -396,6 +396,38 @@ export default function Navbar() {
               </motion.div>
             )}
           </motion.div>
+
+          {/* Login Button */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            <Link
+              href="https://sakay-ph-frontend-payroll.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <motion.button
+                className="navbar-cta-button"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span>Login</span>
+                <motion.span
+                  className="cta-shine"
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "200%" }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 2,
+                    ease: "linear",
+                    repeatDelay: 3,
+                  }}
+                />
+              </motion.button>
+            </Link>
+          </motion.div>
         </div>
 
         <button
