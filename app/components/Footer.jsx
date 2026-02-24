@@ -52,8 +52,8 @@ const Footer = () => {
             <li>
               <span className="contact-icon">📧</span>
               <div>
-                <div>Inquiry@sakay-ph.com</div>
-                <div style={{ marginTop: "4px" }}>Service@sakay-ph.com</div>
+                <div>Inquiry@sakay-ph.net</div>
+                <div style={{ marginTop: "4px" }}>Service@sakay-ph.net</div>
               </div>
             </li>
             <li>
