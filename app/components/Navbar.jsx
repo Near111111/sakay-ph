@@ -397,6 +397,44 @@ export default function Navbar() {
             )}
           </motion.div>
 
+          {/* Cart Icon */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.35 }}
+          >
+            <Link href="/cart" className="navbar-cart-link" aria-label="Order Now">
+              <motion.button
+                className="navbar-cta-button navbar-cart-cta"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span>Order Now</span>
+                <motion.div style={{ marginLeft: "8px", display: "flex", alignItems: "center" }}>
+                  <Image
+                    src="/cart.svg"
+                    alt="Cart"
+                    width={18}
+                    height={18}
+                    priority
+                    className="cart-icon-img"
+                  />
+                </motion.div>
+                <motion.span
+                  className="cta-shine"
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "200%" }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 2,
+                    ease: "linear",
+                    repeatDelay: 3,
+                  }}
+                />
+              </motion.button>
+            </Link>
+          </motion.div>
+
           {/* Login Button */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}

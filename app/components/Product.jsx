@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import "../styles/Product.css";
 
 const products = [
@@ -7,7 +8,7 @@ const products = [
         name: "Sakay Helmet",
         description: "Ride safe with the official Sakay helmet.",
         price: "₱580.00",
-        image: "/helmet.png",
+        images: ["fronthelmet.jpg", "frontleft.jpg", "backleft.jpg", "backhelmet.jpg", "righthelmet.jpg"],
         alt: "Sakay Helmet",
     },
     {
@@ -15,10 +16,64 @@ const products = [
         name: "Sakay Longsleeve",
         description: "Comfortable longsleeve designed for everyday riders.",
         price: "₱180.00",
-        image: "/longsleeve.png",
+        images: ["front.jpg", "left.jpg", "back.jpg", "rightback.jpg", "right.jpg"],
         alt: "Sakay Longsleeve",
     },
 ];
+
+const ProductCarousel = ({ images, alt }) => {
+    const [current, setCurrent] = useState(0);
+
+    const prev = () =>
+        setCurrent((c) => (c - 1 + images.length) % images.length);
+    const next = () =>
+        setCurrent((c) => (c + 1) % images.length);
+
+    return (
+        <div className="product-carousel">
+            <div className="product-carousel-track">
+                {images.map((src, i) => (
+                    <img
+                        key={i}
+                        src={src}
+                        alt={`${alt} view ${i + 1}`}
+                        className={`product-carousel-img ${i === current ? "active" : ""}`}
+                    />
+                ))}
+            </div>
+
+            {images.length > 1 && (
+                <>
+                    <button
+                        className="carousel-btn carousel-btn--prev"
+                        onClick={prev}
+                        aria-label="Previous image"
+                    >
+                        ‹
+                    </button>
+                    <button
+                        className="carousel-btn carousel-btn--next"
+                        onClick={next}
+                        aria-label="Next image"
+                    >
+                        ›
+                    </button>
+
+                    <div className="carousel-dots">
+                        {images.map((_, i) => (
+                            <button
+                                key={i}
+                                className={`carousel-dot ${i === current ? "active" : ""}`}
+                                onClick={() => setCurrent(i)}
+                                aria-label={`Go to image ${i + 1}`}
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
+        </div>
+    );
+};
 
 const Product = () => {
     return (
@@ -51,10 +106,9 @@ const Product = () => {
                     {products.map((product) => (
                         <div key={product.id} className="product-card">
                             <div className="product-image-wrapper">
-                                <img
-                                    src={product.image}
+                                <ProductCarousel
+                                    images={product.images}
                                     alt={product.alt}
-                                    className="product-image"
                                 />
                             </div>
                             <div className="product-info">
