@@ -9,7 +9,7 @@ export default function AboutUs() {
     <>
       <div className="about-us-container">
         <div className="about-us-content">
-          <h1>SAKAY-PH</h1>
+          <h1>SakayGo</h1>
           <p>
             Sakay is a modern service provider platform that seamlessly connects
             drivers and riders, offering a smooth, fast, and reliable
@@ -24,7 +24,7 @@ export default function AboutUs() {
           </p>
           <h1>VISION</h1>
           <p>
-            SAKAY-PH is founded in October 2025 by Mr. Argel Villaluna, with its
+            SakayGo is founded in October 2025 by Mr. Argel Villaluna, with its
             vision to be number one and internationally recognized on ride
             hailing service platform. and its mission on the safety of its
             stakeholders. To give more incentives and earnings for our drivers.

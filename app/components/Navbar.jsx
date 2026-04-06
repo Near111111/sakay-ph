@@ -175,7 +175,7 @@ export default function Navbar() {
             className="navbar-logo-text"
             whileHover={{ color: "#4e2780" }}
           >
-            SAKAY-PH
+            SakayGo
           </motion.span>
         </div>
 

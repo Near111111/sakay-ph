@@ -10,7 +10,7 @@ export const metadata = {
   title: "Sakay PH - Your Ride Hailing App",
   description: "Affordable and convenient transportation in Metro Manila",
   icons: {
-    icon: "/sakay_logo.jpg",
+    icon: "/favicon.ico", // ← palitan dito
   },
 };
 
